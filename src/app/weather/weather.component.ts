@@ -22,7 +22,11 @@ export class WeatherComponent {
 
   }
   ngOnInit(): void {
-      this.weatherService.getweather(this.city, this.units).subscribe({
+    this.getWeather();
+  }
+
+  getWeather(){
+    this.weatherService.getweather(this.city, this.units).subscribe({
 
       next: (res) => {
         console.group(res)
@@ -40,5 +44,14 @@ export class WeatherComponent {
       error: (error) => console.log(error.message),
       complete: () => console.info('Api call completed')
     })
+  }
+
+  onRadioButtonChange(){
+    if (this.units=='imperial'){
+      this.units='metric';
+    }
+    else{
+      this.units='imperial';
+    }
   }
 }
